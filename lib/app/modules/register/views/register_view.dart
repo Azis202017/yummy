@@ -88,7 +88,7 @@ class RegisterView extends GetView<RegisterController> {
                     textAlign: TextAlign.center,
                   ),
                   TextButton(
-                    onPressed: () => Get.toNamed(Routes.HOME),
+                    onPressed: () => Get.toNamed(Routes.LOGIN),
                     child: Text(
                       "Masuk disini",
                       style: TextStyles.body.copyWith(
