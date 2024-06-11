@@ -9,7 +9,7 @@ Commentar commentarFromJson(String str) => Commentar.fromJson(json.decode(str));
 String commentarToJson(Commentar data) => json.encode(data.toJson());
 
 class Commentar {
-    String? id;
+    int? id;
     int? userId;
     int? communityId;
     String? title;
@@ -53,7 +53,7 @@ class Commentar {
 }
 
 class Community {
-    String? id;
+    int? id;
     int? userId;
     String? title;
     String? description;
@@ -97,7 +97,7 @@ class Community {
 }
 
 class User {
-    String? id;
+    int? id;
     String? name;
     String? foto;
     String? email;

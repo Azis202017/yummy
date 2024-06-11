@@ -80,24 +80,19 @@ class CommunityService {
       return false;
     }
   }
-  Future<List<commentar.Commentar>> getCommentar(String id) async {
-    try {
+  Future<List<commentar.Commentar>> getCommentar(int id) async {
       String uri = '/community/comment/$id';
       dio.options.headers['Authorization'] =
           'Bearer ${GetStorage().read('token')}';
       Response response = await dio.get(uri);
-      print(response.data);
-      // if (response.statusCode == 200) {
-      //   List? data = response.data['data'];
-      //   if (data == null || data.isEmpty) {
-      //     return [];
-      //   } else {
-      //     return data.map((e) => commentar.Commentar.fromJson(e)).toList();
-      //   }
-      // }
+      if (response.statusCode == 200) {
+        List? data = response.data['data'];
+        if (data == null || data.isEmpty) {
+          return [];
+        } else {
+          return data.map((e) => commentar.Commentar.fromJson(e)).toList();
+        }
+      }
       return [];
-    } catch (e) {
-      throw Exception(e);
-    }
   }
 }

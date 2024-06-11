@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../data/models/commentar.dart';
+import '../../../data/models/commentar.dart' ;
 import '../../../services/community_service.dart';
 
 class CommentarController extends GetxController {
@@ -18,13 +18,13 @@ class CommentarController extends GetxController {
   }
 
   void sendData() async {
-    // bool isCommunitySend =
-    //     await CommunityService().sendComment(title: comment.text, id: int.parse(id));
-    // if (isCommunitySend) {
-    //   Get.back();
-    //   fetchComment();
-    // }
-    // print(id);
+    bool isCommunitySend =
+        await CommunityService().sendComment(title: comment.text, id: id);
+    if (isCommunitySend) {
+    comment.text = "";
+      fetchComment();
+    }
+    print(id);
   }
 
   void fetchComment() async {
