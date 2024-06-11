@@ -16,7 +16,7 @@ class ProfileView extends GetView<ProfileController> {
             )
           : Scaffold(
               appBar: AppBar(
-                title: const Text('ProfileView'),
+                title: const Text('Profile'),
                 centerTitle: true,
               ),
               body: SingleChildScrollView(
