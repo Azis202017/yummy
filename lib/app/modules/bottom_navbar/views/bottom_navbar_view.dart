@@ -2,7 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:yummy/app/modules/kreasiku/controllers/kreasiku_controller.dart';
 
+import '../../community/controllers/community_controller.dart';
+import '../../home/controllers/home_controller.dart';
+import '../../profile/controllers/profile_controller.dart';
 import '../../theme/theme.dart';
 import '../controllers/bottom_navbar_controller.dart';
 
@@ -11,8 +15,14 @@ class BottomNavbarView extends GetView<BottomNavbarController> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<BottomNavbarController>(builder: (_) {
+      Get.put(HomeController());
+      Get.put(BottomNavbarController());
+
+      Get.put(KreasikuController());
+      Get.put(CommunityController());
+      Get.put(ProfileController());
+
       return Scaffold(
-        appBar: AppBar(),
         bottomNavigationBar: BottomNavigationBar(
           backgroundColor:
               AppColors.white, // Sesuaikan dengan warna latar belakang Anda

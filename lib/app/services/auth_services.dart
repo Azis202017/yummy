@@ -1,3 +1,4 @@
+import 'package:get_storage/get_storage.dart';
 import 'package:yummy/app/global/constanta.dart';
 
 class AuthService {
@@ -6,6 +7,7 @@ class AuthService {
       final response =
           await dio.post('login', data: {'email': email, 'password': password});
       if (response.statusCode == 200) {
+        GetStorage().write('token',response.data['access_token']);
         return true;
       }
 

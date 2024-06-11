@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../routes/app_pages.dart';
 import '../../../services/auth_services.dart';
 
 class RegisterController extends GetxController {
@@ -20,10 +21,16 @@ class RegisterController extends GetxController {
         email: emailController.text,
         password: passwordController.text);
     if (isSuccessRegister) {
-      print("Login");
-      // Get.offAllNamed('/home');
+      // print("Login");
+      Get.offAllNamed(Routes.LOGIN);
     } else {
-      print("False");
+       Get.snackbar(
+        "Error",
+        "Email or password is wrong",
+        snackPosition: SnackPosition.BOTTOM,
+        colorText: Colors.white,
+        backgroundColor:Colors.red,
+      );
     }
   }
 }

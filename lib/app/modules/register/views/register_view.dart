@@ -17,7 +17,7 @@ class RegisterView extends GetView<RegisterController> {
         return Scaffold(
           appBar: AppBar(
             title: Text(
-              'Login',
+              'Register',
               style: TextStyles.title,
             ),
             centerTitle: true,
@@ -33,7 +33,7 @@ class RegisterView extends GetView<RegisterController> {
                   Image.asset('assets/images/Landing page 1.jpg'),
                   const SizedBox(height: 24.0),
                   Text(
-                    'Login Details',
+                    'Register Details',
                     style: TextStyles.title.copyWith(fontSize: 20.0),
                   ),
                   const SizedBox(height: 24.0),
@@ -43,6 +43,8 @@ class RegisterView extends GetView<RegisterController> {
                     textInputAction: TextInputAction.next,
                     hint: 'Name ',
                   ),
+                  const SizedBox(height: 16.0),
+
                   CustomTextField(
                     controller: controller.emailController,
                     textInputType: TextInputType.emailAddress,
@@ -73,7 +75,7 @@ class RegisterView extends GetView<RegisterController> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       child: Text(
-                        'Login',
+                        'Register',
                         style: TextStyles.title.copyWith(
                           fontSize: 20.0,
                           color: Colors.white,
