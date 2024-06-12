@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 
 import 'package:get/get.dart';
+import 'package:yummy/app/services/community_service.dart';
 
 import '../../../data/models/community.dart';
 import '../../../routes/app_pages.dart';
@@ -45,31 +46,70 @@ class CommunityView extends GetView<CommunityController> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(30),
-                                  child: Image.network(
-                                    data.fotoUrl ?? "",
-                                    errorBuilder: (_, __, ___) {
-                                      return Image.asset(
-                                        "assets/images/logo.jpg",
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(30),
+                                      child: Image.network(
+                                        data.user?.fotoUrl ?? "",
+                                        errorBuilder: (_, __, ___) {
+                                          return Image.asset(
+                                            "assets/images/logo.jpg",
+                                            width: 30,
+                                            fit: BoxFit.cover,
+                                            height: 30,
+                                          );
+                                        },
                                         width: 30,
-                                        fit: BoxFit.cover,
                                         height: 30,
-                                      );
-                                    },
-                                    width: 30,
-                                    height: 30,
-                                  ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 8,
+                                    ),
+                                    Text(
+                                      data.user?.name ?? "",
+                                      style: const TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
                                 ),
-                                const SizedBox(
-                                  width: 8,
-                                ),
-                                Text(
-                                  data.user?.name ?? "",
-                                  style: const TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
+                                PopupMenuButton<String>(
+                                  icon: const Icon(Icons
+                                      .more_vert), // Ikon yang digunakan untuk memicu menu popup
+                                  onSelected: (String value) async{
+                                   bool isLaporanSuccess =   await CommunityService().laporkan(id: data.id ?? 0);
+                                   if(isLaporanSuccess) {
+                                     Get.snackbar(
+                                       "Berhasil",
+                                       "Laporan berhasil",
+                                       snackPosition: SnackPosition.BOTTOM,
+                                       backgroundColor: Colors.green,
+                                       duration: const Duration(seconds: 2),
+                                     );
+                                   }else {
+                                     Get.snackbar(
+                                       "Opss gagal melaporkan",
+                                       "Coba ulangi lagi",
+                                       snackPosition: SnackPosition.BOTTOM,
+                                       backgroundColor: Colors.red,
+                                       duration: const Duration(seconds: 2),
+                                     );
+                                   }
+                                  },
+                                  itemBuilder: (BuildContext context) {
+                                    return [
+                                      const PopupMenuItem<String>(
+                                        value: 'Laporkan',
+                                        child: Text('Laporkan'),
+                                      ),
+                                      // Tambahkan item lainnya jika perlu
+                                    ];
+                                  },
                                 ),
                               ],
                             ),
@@ -111,11 +151,11 @@ class CommunityView extends GetView<CommunityController> {
                             TextButton(
                               onPressed: () {
                                 Get.toNamed(Routes.COMMENTAR, arguments: {
-                                  "id" : data.id,
-                                  "title" : data.title,
+                                  "id": data.id,
+                                  "title": data.title,
                                 });
                               },
-                              child:  Row(
+                              child: Row(
                                 children: [
                                   const Icon(
                                     Icons.comment,

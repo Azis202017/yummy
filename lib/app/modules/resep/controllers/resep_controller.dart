@@ -57,7 +57,6 @@ class ResepController extends GetxController {
   }
 
   void add() {
-   
     Get.defaultDialog(
         title: "Tambah resep",
         content: SingleChildScrollView(
@@ -136,6 +135,12 @@ class ResepController extends GetxController {
     if (isCommunitySend) {
       resep();
       Get.back();
+    } else {
+      Get.defaultDialog(
+        title: "Opss ada yang salah",
+        content: const Text(
+            "Check kembali apakah gambar yang dimasukkan kurang dari 2 mb atau isian data ada yang tidak terisi"),
+      );
     }
   }
 }

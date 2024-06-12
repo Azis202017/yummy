@@ -68,6 +68,37 @@ class HomeView extends GetView<HomeController> {
                       //     ],
                       //   ),
                       // ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 20,
+                        ),
+                        child: TextField(
+                          controller: controller.searchController,
+                          onChanged: (value) {
+                            controller.pencarian = value;
+                            controller.update();
+                          },
+                          onEditingComplete: controller.search,
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 1.0,
+                                color: Colors.grey,
+                              ),
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                width: 1.0,
+                                color: Colors.grey,
+                              ),
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                            hintText: "Cari disini",
+                          ),
+                        ),
+                      ),
 
                       Container(
                         margin: const EdgeInsets.fromLTRB(16, 0, 16, 16),
@@ -159,21 +190,6 @@ class HomeView extends GetView<HomeController> {
                             ),
 
                       const SizedBox(height: 8),
-                      // SizedBox(
-                      //   height: 280,
-                      //   child: ListView.separated(
-                      //     itemCount: latestRecipes.length,
-                      //     scrollDirection: Axis.horizontal,
-                      //     padding: const EdgeInsets.symmetric(horizontal: 24),
-                      //     separatorBuilder: (_, __) {
-                      //       return const SizedBox(width: 16);
-                      //     },
-                      //     itemBuilder: (context, index) {
-                      //       final recipe = latestRecipes[index];
-                      //       return RecipeItem(recipe: recipe);
-                      //     },
-                      //   ),
-                      // ),
                     ],
                   ),
                 ),
@@ -202,35 +218,6 @@ class RecipeItem extends StatelessWidget {
             ),
             child: Image.network(recipe.fotoUrl ?? ""),
           ),
-          //  Positioned(
-          //     top: 8,
-          //     left: 8,
-
-          //     /// make a glass effect
-          //     child: ClipRRect(
-          //       child: BackdropFilter(
-          //         filter: ImageFilter.blur(
-          //           sigmaX: 5,
-          //           sigmaY: 5,
-          //         ),
-          //         child: Container(
-          //           padding: const EdgeInsets.all(8),
-          //           decoration: BoxDecoration(
-          //             color: AppColors.black.withOpacity(0.5),
-          //             borderRadius: BorderRadius.circular(8),
-          //           ),
-          //           child: Text(
-          //             recipe.status,
-          //             style: Theme.of(context)
-          //                 .textTheme
-          //                 .bodyMedium
-          //                 ?.copyWith(color: Colors.white),
-          //           ),
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-
           Positioned(
             bottom: 8,
             left: 8,

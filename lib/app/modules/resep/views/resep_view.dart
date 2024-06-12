@@ -31,9 +31,7 @@ class ResepView extends GetView<ResepController> {
                           ClickableWidget(
                             isActive: controller.activeWidget == 0,
                             onTap: () {
-                              // Implementasi ketika widget "Diajukan" ditekan
-                              // Misalnya, panggil method controller atau lakukan operasi lainnya
-                              // Contoh: controller.ajukanResep();
+                            
                               controller.setActiveWidget(0);
                               print(controller.activeWidget);
                             },
@@ -104,6 +102,7 @@ class ResepView extends GetView<ResepController> {
                               ),
                             );
                           })
+                 
                     ],
                   ),
                 ),

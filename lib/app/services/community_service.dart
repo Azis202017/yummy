@@ -57,7 +57,7 @@ class CommunityService {
       return false;
     }
   }
- 
+
   Future<bool> sendComment({
     required String title,
     required int id,
@@ -66,7 +66,6 @@ class CommunityService {
       FormData formData = FormData.fromMap(
         {
           "title": title,
-         
           "community_id": id,
         },
       );
@@ -82,19 +81,41 @@ class CommunityService {
       return false;
     }
   }
+
   Future<List<commentar.Commentar>> getCommentar(int id) async {
-      String uri = '/community/comment/$id';
+    String uri = '/community/comment/$id';
+    dio.options.headers['Authorization'] =
+        'Bearer ${GetStorage().read('token')}';
+    Response response = await dio.get(uri);
+    if (response.statusCode == 200) {
+      List? data = response.data['data'];
+      if (data == null || data.isEmpty) {
+        return [];
+      } else {
+        return data.map((e) => commentar.Commentar.fromJson(e)).toList();
+      }
+    }
+    return [];
+  }
+
+  Future<bool> laporkan({required int id}) async {
+    try {
+      FormData formData = FormData.fromMap(
+        {
+          "community_id": id,
+        },
+      );
       dio.options.headers['Authorization'] =
           'Bearer ${GetStorage().read('token')}';
-      Response response = await dio.get(uri);
+      var response = await dio.post("/report", data: formData);
+      
+      print(response.data);
       if (response.statusCode == 200) {
-        List? data = response.data['data'];
-        if (data == null || data.isEmpty) {
-          return [];
-        } else {
-          return data.map((e) => commentar.Commentar.fromJson(e)).toList();
-        }
+        return true;
       }
-      return [];
+      return false;
+    } catch (e) {
+      return false;
+    }
   }
 }

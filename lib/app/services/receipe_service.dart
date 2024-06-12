@@ -7,15 +7,20 @@ import 'package:yummy/app/data/models/recipe.dart';
 import '../global/constanta.dart';
 
 class ReceipeService {
-  Future<List<Recipe>> getAllRecipe() async {
+  Future<List<Recipe>> getAllRecipe({String? judul}) async {
     try {
-      String url = '/resep';
+      String url = '/resep/';
+
+      if (judul != null) {
+        url = "/resep/?judul_resep=$judul";
+      }
       dio.options.headers['Authorization'] =
           'Bearer ${GetStorage().read('token')}';
 
       Response response = await dio.get(
         url,
       );
+      print(response.data);
       if (response.statusCode == 200) {
         List? data = response.data['data'];
         if (data == null || data.isEmpty) {
@@ -29,7 +34,8 @@ class ReceipeService {
       throw Exception(e);
     }
   }
-    Future<List<Recipe>> getMyRecipe({String? status}) async {
+
+  Future<List<Recipe>> getMyRecipe({String? status}) async {
     try {
       String url = '/resep/find-my-recept?status=$status';
       dio.options.headers['Authorization'] =
@@ -68,7 +74,6 @@ class ReceipeService {
           "lama_memasak": lamaMemasak,
           "cara_memasak": caraMemasak,
           "status": "diajukan",
-          
         },
       );
 
@@ -76,8 +81,8 @@ class ReceipeService {
           'Bearer ${GetStorage().read('token')}';
       var response = await dio.post("/resep/create", data: formData);
       print(response.data);
-     
-      if (response.statusCode == 200) {
+
+      if (response.statusCode == 201) {
         return true;
       }
       return false;
@@ -85,5 +90,5 @@ class ReceipeService {
       return false;
     }
   }
- 
+
 }
