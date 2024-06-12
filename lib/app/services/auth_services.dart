@@ -6,6 +6,7 @@ class AuthService {
     try {
       final response =
           await dio.post('login', data: {'email': email, 'password': password});
+      print(response.data);
       if (response.statusCode == 200) {
         GetStorage().write('token',response.data['access_token']);
         return true;

@@ -115,16 +115,16 @@ class CommunityView extends GetView<CommunityController> {
                                   "title" : data.title,
                                 });
                               },
-                              child: const Row(
+                              child:  Row(
                                 children: [
-                                  Icon(
+                                  const Icon(
                                     Icons.comment,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 8,
                                   ),
                                   Text(
-                                    "30 Komentar",
+                                    "${data.commentar?.length} Komentar",
                                   ),
                                 ],
                               ),

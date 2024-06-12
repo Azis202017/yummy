@@ -29,15 +29,16 @@ class ReceipeService {
       throw Exception(e);
     }
   }
-    Future<List<Recipe>> getMyRecipe() async {
+    Future<List<Recipe>> getMyRecipe({String? status}) async {
     try {
-      String url = '/find-my-recept';
+      String url = '/resep/find-my-recept?status=$status';
       dio.options.headers['Authorization'] =
           'Bearer ${GetStorage().read('token')}';
 
       Response response = await dio.get(
         url,
       );
+      print(response.data);
       if (response.statusCode == 200) {
         List? data = response.data['data'];
         if (data == null || data.isEmpty) {
@@ -81,5 +82,5 @@ class ReceipeService {
       return false;
     }
   }
-
+ 
 }

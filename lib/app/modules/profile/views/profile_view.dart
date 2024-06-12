@@ -50,9 +50,7 @@ class ProfileView extends GetView<ProfileController> {
                             Align(
                               alignment: Alignment.bottomRight,
                               child: IconButton(
-                                onPressed: () {
-
-                                },
+                                onPressed: controller.add,
                                 icon: const CircleAvatar(
                                   child: Icon(
                                     Icons.edit,

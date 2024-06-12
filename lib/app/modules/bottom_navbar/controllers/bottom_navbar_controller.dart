@@ -9,8 +9,8 @@ class BottomNavbarController extends GetxController {
   int selectedIndex = 0;
   final listPage = [
     const HomeView(),
-    const KreasikuView(),
     const CommunityView(),
+    const KreasikuView(),
     const ProfileView(),
 
   ];

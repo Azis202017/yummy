@@ -11,56 +11,60 @@ class ResepView extends GetView<ResepController> {
   Widget build(BuildContext context) {
     return GetBuilder<ResepController>(builder: (context) {
       return Scaffold(
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal:16,),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(
-                height: 20,
-              ),
-              Wrap(
-                children: [
-                  ClickableWidget(
-                    isActive: controller.activeWidget == 0,
-                    onTap: () {
-                      // Implementasi ketika widget "Diajukan" ditekan
-                      // Misalnya, panggil method controller atau lakukan operasi lainnya
-                      // Contoh: controller.ajukanResep();
-                      controller.setActiveWidget(0);
-                      print(controller.activeWidget);
-                    },
-                    label: 'Diajukan',
-                  ),
-                  const SizedBox(
-                    width: 25,
-                  ),
-                  ClickableWidget(
-                    isActive: controller.activeWidget == 1,
-                    onTap: () {
-                      // Implementasi ketika widget "Ditolak" ditekan
-                      // Misalnya, panggil method controller atau lakukan operasi lainnya
-                      // Contoh: controller.tolakResep();
-                      controller.setActiveWidget(1);
-                      print(controller.activeWidget);
-                    },
-                    label: 'Ditolak',
-                  ),
-                  const SizedBox(
-                    width: 25,
-                  ),
-                  ClickableWidget(
-                    isActive: controller.activeWidget == 2,
-                    onTap: () {
-                      controller.setActiveWidget(2);
-                      print(controller.activeWidget);
-
-                    },
-                    label: 'Diupload',
-                  ),
-                ],
-              ),
-            ],
+        body: RefreshIndicator(
+          onRefresh: () async => controller.resep(),
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            padding: const EdgeInsets.symmetric(horizontal:16,),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 20,
+                ),
+                Wrap(
+                  children: [
+                    ClickableWidget(
+                      isActive: controller.activeWidget == 0,
+                      onTap: () {
+                        // Implementasi ketika widget "Diajukan" ditekan
+                        // Misalnya, panggil method controller atau lakukan operasi lainnya
+                        // Contoh: controller.ajukanResep();
+                        controller.setActiveWidget(0);
+                        print(controller.activeWidget);
+                      },
+                      label: 'Diajukan',
+                    ),
+                    const SizedBox(
+                      width: 25,
+                    ),
+                    ClickableWidget(
+                      isActive: controller.activeWidget == 1,
+                      onTap: () {
+                        // Implementasi ketika widget "Ditolak" ditekan
+                        // Misalnya, panggil method controller atau lakukan operasi lainnya
+                        // Contoh: controller.tolakResep();
+                        controller.setActiveWidget(1);
+                        print(controller.activeWidget);
+                      },
+                      label: 'Ditolak',
+                    ),
+                    const SizedBox(
+                      width: 25,
+                    ),
+                    ClickableWidget(
+                      isActive: controller.activeWidget == 2,
+                      onTap: () {
+                        controller.setActiveWidget(2);
+                        print(controller.activeWidget);
+          
+                      },
+                      label: 'Diupload',
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       );

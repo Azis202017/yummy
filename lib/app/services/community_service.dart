@@ -16,6 +16,7 @@ class CommunityService {
       dio.options.headers['Authorization'] =
           'Bearer ${GetStorage().read('token')}';
       Response response = await dio.get(uri);
+      print(response.data);
       if (response.statusCode == 200) {
         List? data = response.data;
         if (data == null || data.isEmpty) {
@@ -26,7 +27,7 @@ class CommunityService {
       }
       return [];
     } catch (e) {
-      throw Exception(e);
+      return [];
     }
   }
 
@@ -56,6 +57,7 @@ class CommunityService {
       return false;
     }
   }
+ 
   Future<bool> sendComment({
     required String title,
     required int id,
