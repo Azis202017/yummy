@@ -37,59 +37,58 @@ class CommunityController extends GetxController {
 
   void add() {
     Get.defaultDialog(
-      title: "Tambah Komunitas",
-      content: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CustomTextField(
-              controller: title,
-              textInputType: TextInputType.text,
-              textInputAction: TextInputAction.done,
-              hint: "Masukkan judul",
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            CustomTextField(
-              controller: description,
-              textInputType: TextInputType.text,
-              textInputAction: TextInputAction.done,
-              hint: "Masukkan Deskripsi",
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Row(
-              children: [
-                ElevatedButton(
-                  onPressed: () => pickImage(ImageSource.camera),
-                  child: const Text('Kamera'),
-                ),
-                const SizedBox(width: 10),
-                ElevatedButton(
-                  onPressed: () => pickImage(ImageSource.gallery),
-                  child: const Text('Galeri'),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            GetBuilder<CommunityController>(
-              builder: (controller) {
-                return controller.image == null
-                    ? const Text('No image selected.')
-                    : Image.file(controller.image!);
-              },
-            ),
-          ],
+        title: "Tambah Komunitas",
+        content: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CustomTextField(
+                controller: title,
+                textInputType: TextInputType.text,
+                textInputAction: TextInputAction.done,
+                hint: "Masukkan judul",
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              CustomTextField(
+                controller: description,
+                textInputType: TextInputType.text,
+                textInputAction: TextInputAction.done,
+                hint: "Masukkan Deskripsi",
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: [
+                  ElevatedButton(
+                    onPressed: () => pickImage(ImageSource.camera),
+                    child: const Text('Kamera'),
+                  ),
+                  const SizedBox(width: 10),
+                  ElevatedButton(
+                    onPressed: () => pickImage(ImageSource.gallery),
+                    child: const Text('Galeri'),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              GetBuilder<CommunityController>(
+                builder: (controller) {
+                  return controller.image == null
+                      ? const Text('No image selected.')
+                      : Image.file(controller.image!);
+                },
+              ),
+            ],
+          ),
         ),
-      ),
-      textConfirm: 'OK',
-      textCancel: 'Cancel',
-      onConfirm: sendData
-    );
+        textConfirm: 'OK',
+        textCancel: 'Cancel',
+        onConfirm: sendData);
   }
 
   void sendData() async {
@@ -97,10 +96,10 @@ class CommunityController extends GetxController {
         title: title.text,
         foto: image ?? File(image?.path ?? ""),
         description: description.text);
-    if(isCommunitySend) {
+    if (isCommunitySend) {
       Get.back();
-    fetchCommunity();
-
+      fetchCommunity();
     }
   }
+  
 }

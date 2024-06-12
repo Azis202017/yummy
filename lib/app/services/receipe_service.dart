@@ -71,9 +71,12 @@ class ReceipeService {
           
         },
       );
+
       dio.options.headers['Authorization'] =
-          'Bearer ${GetStorage().read('user_token')}';
+          'Bearer ${GetStorage().read('token')}';
       var response = await dio.post("/resep/create", data: formData);
+      print(response.data);
+     
       if (response.statusCode == 200) {
         return true;
       }
