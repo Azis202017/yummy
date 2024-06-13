@@ -18,6 +18,7 @@ abstract class Routes {
   static const COMMUNITY = _Paths.COMMUNITY;
   static const PROFILE = _Paths.PROFILE;
   static const COMMENTAR = _Paths.COMMENTAR;
+  static const DETAIL_RESEP = _Paths.DETAIL_RESEP;
 }
 
 abstract class _Paths {
@@ -35,4 +36,5 @@ abstract class _Paths {
   static const COMMUNITY = '/community';
   static const PROFILE = '/profile';
   static const COMMENTAR = '/commentar';
+  static const DETAIL_RESEP = '/detail-resep';
 }

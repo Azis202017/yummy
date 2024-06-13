@@ -24,7 +24,7 @@ class ResepController extends GetxController {
     } else if (activeWidget == 1) {
       status = "ditolak";
     } else if (activeWidget == 2) {
-      status = "diupload";
+      status = "dipublikasikan";
     }
     recipe = await ReceipeService().getMyRecipe(status: status);
 

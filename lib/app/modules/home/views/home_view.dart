@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yummy/app/data/models/recipe.dart';
 
+import '../../../routes/app_pages.dart';
 import '../../theme/theme.dart';
 import '../controllers/home_controller.dart';
 
@@ -48,26 +49,6 @@ class HomeView extends GetView<HomeController> {
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       ),
-                      // Container(
-                      //   margin: const EdgeInsets.all(16),
-                      //   padding: const EdgeInsets.all(16),
-                      //   decoration: BoxDecoration(
-                      //     color: AppColors.abumuda,
-                      //     borderRadius: BorderRadius.circular(16),
-                      //   ),
-                      //   child: Row(
-                      //     children: [
-                      //       const Icon(Icons.search),
-                      //       const SizedBox(width: 8),
-                      //       Expanded(
-                      //         child: Text(
-                      //           "Cari Resep Di Sini",
-                      //           style: Theme.of(context).textTheme.bodyLarge,
-                      //         ),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
                       Padding(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 20,
@@ -99,7 +80,6 @@ class HomeView extends GetView<HomeController> {
                           ),
                         ),
                       ),
-
                       Container(
                         margin: const EdgeInsets.fromLTRB(16, 0, 16, 16),
                         padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
@@ -137,9 +117,7 @@ class HomeView extends GetView<HomeController> {
                           ],
                         ),
                       ),
-
                       const SizedBox(height: 8),
-
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 24),
                         child: Row(
@@ -172,23 +150,37 @@ class HomeView extends GetView<HomeController> {
                             ))
                           : SizedBox(
                               height: 280,
-                              child: ListView.separated(
-                                itemCount:
-                                    controller.recommendationRecipes.length,
-                                scrollDirection: Axis.horizontal,
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 24),
-                                separatorBuilder: (_, __) {
-                                  return const SizedBox(width: 16);
-                                },
-                                itemBuilder: (context, index) {
-                                  final recipe =
-                                      controller.recommendationRecipes[index];
-                                  return RecipeItem(recipe: recipe);
-                                },
+                              child: GestureDetector(
+                                child: ListView.separated(
+                                  itemCount:
+                                      controller.recommendationRecipes.length,
+                                  scrollDirection: Axis.horizontal,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 24),
+                                  separatorBuilder: (_, __) {
+                                    return const SizedBox(width: 16);
+                                  },
+                                  itemBuilder: (context, index) {
+                                    final recipe =
+                                        controller.recommendationRecipes[index];
+                                    return GestureDetector(
+                                      onTap: () {
+                                        Get.toNamed(
+                                          Routes.DETAIL_RESEP,
+                                          arguments: {
+                                            'id': recipe.id,
+                                          },
+                                        );
+                                        print(recipe.id,);
+                                      },
+                                      child: RecipeItem(
+                                        recipe: recipe,
+                                      ),
+                                    );
+                                  },
+                                ),
                               ),
                             ),
-
                       const SizedBox(height: 8),
                     ],
                   ),

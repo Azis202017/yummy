@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:yummy/app/data/models/detail_resep.dart';
 import 'package:yummy/app/data/models/recipe.dart';
 
 import '../global/constanta.dart';
@@ -32,6 +33,26 @@ class ReceipeService {
       return [];
     } catch (e) {
       throw Exception(e);
+    }
+  }
+
+  Future<DetailResep?> getDetailResep({int? id}) async {
+    try {
+      String url = '/resep/$id';
+      print(id);
+      dio.options.headers['Authorization'] =
+          'Bearer ${GetStorage().read('token')}';
+
+      Response response = await dio.get(
+        url,
+      );
+      print(response.data);
+      if (response.statusCode == 200) {
+        return DetailResep.fromJson(response.data);
+      }
+      return null;
+    } catch (e) {
+      return null;
     }
   }
 
@@ -90,5 +111,4 @@ class ReceipeService {
       return false;
     }
   }
-
 }

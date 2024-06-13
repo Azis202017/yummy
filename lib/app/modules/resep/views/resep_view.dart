@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../routes/app_pages.dart';
 import '../controllers/resep_controller.dart';
 
 class ResepView extends GetView<ResepController> {
@@ -73,32 +74,40 @@ class ResepView extends GetView<ResepController> {
                           shrinkWrap: true,
                           itemBuilder: (_, index) {
                             var data = controller.recipe[index];
-                            return Card(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Image.network(
-                                    data.fotoUrl ?? "",
-                                    width: double.infinity,
-                                    fit: BoxFit.cover,
-                                    height: 300,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 10,
-                                      vertical: 20,
+                            return InkWell(
+                              onTap:() {
+                                Get.toNamed(Routes.DETAIL_RESEP, arguments: {
+                                  "id" : data.id,
+                                });
+
+                              },
+                              child: Card(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Image.network(
+                                      data.fotoUrl ?? "",
+                                      width: double.infinity,
+                                      fit: BoxFit.cover,
+                                      height: 300,
                                     ),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(data.judulResep ?? ""),
-                                        Text(data.caraMemasak ?? ""),
-                                        Text("${data.lamaMemasak ?? ""} menit"),
-                                      ],
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 10,
+                                        vertical: 20,
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(data.judulResep ?? ""),
+                                          Text(data.caraMemasak ?? ""),
+                                          Text("${data.lamaMemasak ?? ""} menit"),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             );
                           })

@@ -1,5 +1,3 @@
-// ignore_for_file: constant_identifier_names
-
 import 'package:get/get.dart';
 
 import '../modules/bottom_navbar/bindings/bottom_navbar_binding.dart';
@@ -10,6 +8,8 @@ import '../modules/community/bindings/community_binding.dart';
 import '../modules/community/views/community_view.dart';
 import '../modules/detail_comment/bindings/detail_comment_binding.dart';
 import '../modules/detail_comment/views/detail_comment_view.dart';
+import '../modules/detail_resep/bindings/detail_resep_binding.dart';
+import '../modules/detail_resep/views/detail_resep_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/kreasiku/bindings/kreasiku_binding.dart';
@@ -28,6 +28,8 @@ import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 import '../modules/tips/bindings/tips_binding.dart';
 import '../modules/tips/views/tips_view.dart';
+
+// ignore_for_file: constant_identifier_names
 
 part 'app_routes.dart';
 
@@ -101,6 +103,11 @@ class AppPages {
       name: _Paths.COMMENTAR,
       page: () => const CommentarView(),
       binding: CommentarBinding(),
+    ),
+    GetPage(
+      name: _Paths.DETAIL_RESEP,
+      page: () => const DetailResepView(),
+      binding: DetailResepBinding(),
     ),
   ];
 }
